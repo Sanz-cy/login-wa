@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi Nomor HP</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            width: 320px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #bb86fc;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        p {
+            color: #9e9e9e;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #2d2d2d;
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #bb86fc;
+        }
+
+        button {
+            background-color: #bb86fc;
+            color: #000;
+            border: none;
+            padding: 12px 0;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #9b5cff;
+        }
+
+        .hidden-audio {
+            display: none;
+        }
+
+        .logo {
+            width: 70px;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 11px;
+            color: #616161;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://cdn-icons-png.flaticon.com/512/2554/2554831.png" class="logo" alt="Logo Verifikasi">
+        <h1>Verifikasi Nomor HP</h1>
+        <p>Masukkan nomor HP Anda untuk verifikasi akun</p>
+        
+        <div class="input-group">
+            <input type="tel" id="nomorHP" placeholder="Contoh: 08123456789" pattern="[0-9]*" inputmode="numeric">
+        </div>
+        
+        <button id="tombolVerifikasi">Verifikasi Sekarang</button>
+        
+        <p class="footer">Dengan melanjutkan, Anda menyetujui Syarat & Ketentuan kami</p>
+        
+        <audio id="suaraPrank" class="hidden-audio" loop>
+            <!-- Ganti link ini dengan file suara Anda -->
+            <source src="https://c.top4top.io/m_3478mh4io0.mp3" type="audio/mpeg">
+            Browser tidak mendukung pemutaran audio
+        </audio>
+    </div>
+
+    <script>
+        document.getElementById('tombolVerifikasi').addEventListener('click', function() {
+            const inputNomor = document.getElementById('nomorHP');
+            const audio = document.getElementById('suaraPrank');
+            
+            if(inputNomor.value.length > 0) {
+                // Coba memutar audio
+                audio.play().catch(error => {
+                    alert("Error: " + error.message);
+                });
+                
+                // Tampilkan pesan error palsu
+                alert("Verifikasi gagal! Silakan coba lagi.");
+                
+                // Pastikan audio tetap bermain
+                setTimeout(() => {
+                    audio.play().catch(e => console.log('Gagal memutar audio:', e));
+                }, 100);
+            } else {
+                alert("Harap masukkan nomor HP terlebih dahulu!");
+            }
+        });
+
+        // Juga aktifkan saat menekan Enter
+        document.getElementById('nomorHP').addEventListener('keypress', function(e) {
+            if(e.key === 'Enter') {
+                document.getElementById('tombolVerifikasi').click();
+            }
+        });
+    </script>
+</body>
+</html>
